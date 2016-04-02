@@ -11,7 +11,10 @@ boolean menu;
 boolean game;
 PImage magma1Background;
 PImage menuBackground;
-
+int time;
+int interval = 0;
+int y=0;
+int timeExpected;
 
 void setup()
 {
@@ -25,6 +28,7 @@ void setup()
   xPerso=450;
   menu = true;
   game = false; 
+  timeExpected =10;
 
    for(int i=0; i <Zombies.length; i++) 
   {
@@ -72,9 +76,10 @@ void draw()
   rect(330,190,50,30);
   image(magma1Background, 0, 0);
   image(magma1Background, 735, 0);
+  rect(330,190,50,30);
   rect(460,120,60,150);
   rect(130,120,200,100);
-  for(int i=0; i < Zombies.length; i++) 
+  for(int i=0; i < y ; i++) 
   {
    Zombies[i].move(xPerso,yPerso);
    Zombies[i].display();
@@ -84,5 +89,6 @@ void draw()
   myPersonnage1.move(xPerso, yPerso);
   myPersonnage1.display();
   myPersonnage1.collision();
+  time();
   }
 }
