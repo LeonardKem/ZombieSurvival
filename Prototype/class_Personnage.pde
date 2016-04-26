@@ -22,62 +22,182 @@ class Personnage
   void display() {
     stroke(0);
     fill(c);
-    ellipse(xPerso,yPerso,20,20);
- 
   }
 
 
-  void  move(int xperso, int yperso) {
+  void  move() {
  if (keyPressed == true)
   {
     if (key == 'z' && yPerso>0) {
-      yPerso = yPerso-yspeed ;
-    }
-    else if (key == 's'&& yPerso<698) {
+            if (
+            xPerso > 550-20 && 
+            xPerso< 550+200+20 && 
+            yPerso > 249-20 && 
+            yPerso < 249 )
+            {
+               yspeed=1;
+            }
+            yPerso = yPerso-yspeed ; 
+            if (right==true)
+            {
+              personnageMoveLeft_haut.resize(79,101);
+      image(personnageMoveLeft_haut, xPerso-40,yPerso-50);
+            }
+      if (left == true)
+      {
+      personnageMoveRight_haut.resize(79,101);
+      image(personnageMoveRight_haut, xPerso-40,yPerso-50);
+      haut=true;
+      bas=false ; 
+      gauche=false;
+      droite=false;
+      }
+    
+  }
+    
+    
+    
+    if (key == 's'&& yPerso<698) {
+       if (
+          xPerso > 550-20 && 
+          xPerso< 550-20+200+40 && 
+          yPerso  > 249+200 && 
+          yPerso < 249+200+20 )
+          {
+          yspeed=1; 
+          }
+           if (right==true)
+            {
+              personnageMoveLeft_bas.resize(79,101);
+      image(personnageMoveLeft_bas, xPerso-40,yPerso-50);
+            }
+      if (left == true)
+      {
+      personnageMoveRight_bas.resize(79,101);
+      image(personnageMoveRight_bas, xPerso-40,yPerso-50);
+      }
       yPerso = yPerso+yspeed ;
-    }
-    else if (key == 'd' && xPerso<1300) {
-      xPerso = xPerso+xspeed ;
-    }
-    else if (key == 'q' && xPerso>0) {
+      haut=false;
+      bas=true ; 
+      gauche=false;
+      droite=false;  
+  }
+    
+    
+    
+    if (key == 'q' && xPerso>0) {
+         if (
+           xPerso > 550-20 && 
+           xPerso< 550 && 
+           yPerso > 249 && 
+           yPerso < 249+200 ) 
+           {
+              xspeed=1;
+           }
+            if (right==true)
+            {
+              personnageMoveLeft_gauche.resize(101,79);
+      image(personnageMoveLeft_gauche, xPerso-50,yPerso-40);
+            }
+      if (left == true)
+      {
+      personnageMoveRight_gauche.resize(101,79);
+      image(personnageMoveRight_gauche, xPerso-50,yPerso-40);
+      }
       xPerso = xPerso-xspeed ;
+      haut=false;
+      bas=false ; 
+      gauche=true;
+      droite=false;
+    }
+    
+    
+    if (key == 'd' && xPerso<1300) {
+      if (
+          xPerso > 550+200 && 
+          xPerso< 550+200+20 && 
+          yPerso > 249 && 
+          yPerso < 249+200 )
+          {
+            xspeed=1;
+          }
+           if (right==true)
+            {
+              personnageMoveLeft_droite.resize(101,79);
+      image(personnageMoveLeft_droite, xPerso-50,yPerso-40);
+            }
+      if (left == true)
+      {
+      personnageMoveRight_droite.resize(101,79);
+      image(personnageMoveRight_droite, xPerso-50,yPerso-40);
+      }
+      
+      xPerso = xPerso+xspeed ;
+      haut=false;
+      bas=false ; 
+      gauche=false;
+      droite=true;
     }
   }
+    else 
+    {
+      if (haut==true)
+      {
+      personnageMoveRight_haut.resize(79,101);
+      image(personnageMoveRight_haut, xPerso-40,yPerso-50);
+      }
+      
+      if (bas==true)
+      {
+        personnageMoveRight_bas.resize(79,101);
+      image(personnageMoveRight_bas, xPerso-40,yPerso-50);
+      }
+      if (droite==true)
+      {
+      personnageMoveRight_droite.resize(101,79);
+      image(personnageMoveRight_droite, xPerso-50,yPerso-40);
+      }
+       if (gauche==true)
+      {
+      personnageMoveRight_gauche.resize(101,79);
+      image(personnageMoveRight_gauche, xPerso-50,yPerso-40);
+      }
+  }
 }
+
 void collision()
 {
   zonex=0;
   zoney=0;
   fill(0);
-   if (
-  xPerso > 330-20 && 
-  xPerso< 330+50+20 && 
-  yPerso > 190-20 && 
-  yPerso < 190 ) //barre supérieure, je vérifie que le personnage est dans une zone
+
+  if (
+  xPerso > 550-20 && 
+  xPerso< 550+200+20 && 
+  yPerso > 249-20 && 
+  yPerso < 249 ) //barre supérieure
   {
    zoney=1;
-   
   }
   if (
-  xPerso > 330-20 && 
-  xPerso< 330-20+50+40 && 
-  yPerso > 190+30 && 
-  yPerso < 190+30+20 ) // barre bas
+  xPerso > 550-20 && 
+  xPerso< 550-20+200+40 && 
+  yPerso  > 249+200 && 
+  yPerso < 249+200+20 ) // barre bas
   {
   zoney=1; 
   }
-  if (xPerso > 330-20 && 
-  xPerso< 330 && 
-  yPerso > 190 && 
-  yPerso < 190+30 ) //barre gauche
+  if (xPerso > 550-20 && 
+  xPerso< 550 && 
+  yPerso > 249 && 
+  yPerso < 249+200 ) //carré gauche
   {
   zonex=1;
-
   }
-  if (xPerso > 330+50 && 
-  xPerso< 330+50+20 && 
-  yPerso > 190 && 
-  yPerso < 190+30 ) //barre droite
+  if (xPerso > 550+200 && 
+  xPerso< 550+200+20 && 
+  yPerso > 249 && 
+  yPerso < 249+200 ) //carré droite
   {
   zonex=1;
   }
@@ -103,5 +223,21 @@ void collision()
   }
   
   
+}
+
+void earnLife(int xPerso,int yPerso)
+{
+    if (time%10==0)
+    {
+    fill(250,0,0);
+    rect(550,249,200,200);
+    if(xPerso >520 && xPerso <770 && yPerso >219 && yPerso < 469 )
+    {
+      viePerso= viePerso+1; 
+    }
+  }
+
+
+
 }
 }

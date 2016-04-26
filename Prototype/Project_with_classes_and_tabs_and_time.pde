@@ -1,6 +1,4 @@
-Zombie[] Zombies = new Zombie[10];
-Zombie myZombie1;
-Zombie myZombie2; 
+Zombie[] Zombies = new Zombie[10000];
 Personnage myPersonnage1;
 
 int xPerso;
@@ -11,24 +9,46 @@ boolean menu;
 boolean game;
 PImage magma1Background;
 PImage menuBackground;
+PImage personnageMoveRight_haut;
+PImage personnageMoveLeft_haut;
+PImage personnageMoveRight_droite;
+PImage personnageMoveLeft_droite;
+PImage personnageMoveRight_bas;
+PImage personnageMoveLeft_bas;
+PImage personnageMoveRight_gauche;
+PImage personnageMoveLeft_gauche;
 int time;
 int interval = 0;
-int y=0;
+boolean haut, bas, gauche, droite; 
+float tic=0;
 int timeExpected;
-
+int timeExpectedForTic =0;
+int counter;
+boolean right=true;
+boolean left = false;
+boolean a;
 void setup()
 {
 
   magma1Background= loadImage("texture.jpg");
   menuBackground= loadImage("last-one.jpg");
+  personnageMoveRight_haut= loadImage("herod_haut.png");
+  personnageMoveLeft_haut= loadImage("herog_haut.png");
+  personnageMoveRight_droite= loadImage("herod_droite.png");
+  personnageMoveLeft_droite= loadImage("herog_droite.png");
+  personnageMoveRight_bas= loadImage("herod_bas.png");
+  personnageMoveLeft_bas= loadImage("herog_bas.png");
+  personnageMoveRight_gauche= loadImage("herod_gauche.png");
+  personnageMoveLeft_gauche= loadImage("herog_gauche.png");
   size(1300,698);
-  viePerso = 3000;
+  viePerso = 20000;
   avx=5;
   avy=5;
   xPerso=450;
+  counter=0;
   menu = true;
   game = false; 
-  timeExpected =10;
+  timeExpected =2;
 
    for(int i=0; i <Zombies.length; i++) 
   {
@@ -51,9 +71,9 @@ void setup()
    {
      y=698;
    }
-   Zombies[i] = new Zombie(100,x, y , 1, 1,xPerso, yPerso);
+   Zombies[i] = new Zombie(color(82,250,28),x, y , 1, 1,xPerso, yPerso);
   }
-  myPersonnage1 = new Personnage(color(400,0,0),800,100,5,5,xPerso, yPerso);
+  myPersonnage1 = new Personnage(color(250,250,250),800,100,5,5,xPerso, yPerso);
   
   
 }
@@ -63,32 +83,30 @@ void setup()
 
 void draw() 
 {
+ 
   if (menu == true)
   {
     menu();
-    fill(255,0,0,0);
-    noStroke();
-    rect(175,340,200,50);
+   
   }
   if (game == true)
   {
-  background(250,250,250);      //map
-  rect(330,190,50,30);
-  image(magma1Background, 0, 0);
-  image(magma1Background, 735, 0);
-  rect(330,190,50,30);
-  rect(460,120,60,150);
-  rect(130,120,200,100);
-  for(int i=0; i < y ; i++) 
+  background(0);//map
+  for(int i=0; i < tic/100 ; i++) 
   {
    Zombies[i].move(xPerso,yPerso);
    Zombies[i].display();
    Zombies[i].collision();
    Zombies[i].fire(xPerso,yPerso);
  }
-  myPersonnage1.move(xPerso, yPerso);
+ fill(240,231,220);
+  rect(550,249,200,200);
+  myPersonnage1.move();
   myPersonnage1.display();
   myPersonnage1.collision();
+  myPersonnage1.earnLife(xPerso,yPerso);
   time();
+  messages();
+
   }
 }
