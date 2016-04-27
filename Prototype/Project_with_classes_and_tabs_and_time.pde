@@ -1,5 +1,7 @@
 Zombie[] Zombies = new Zombie[10000];
 Personnage myPersonnage1;
+HLine h1 = new HLine(20, 2.0); 
+HLine h2 = new HLine(50, 2.5); 
 
 int xPerso;
 int yPerso;
@@ -87,7 +89,8 @@ void draw()
   if (menu == true)
   {
     menu();
-   
+  h1.update(); 
+  h2.update();
   }
   if (game == true)
   {
@@ -107,6 +110,8 @@ void draw()
   myPersonnage1.earnLife(xPerso,yPerso);
   time();
   messages();
+    h1.update(); 
+  h2.update();
 
   }
 }
