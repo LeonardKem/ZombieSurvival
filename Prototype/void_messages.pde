@@ -3,8 +3,6 @@ void messages()
   textSize(32);
   textAlign(LEFT);
   text("life:",20,100);
-  text(time,20,300);
-  text(tic,20,500);
   text(viePerso ,100,100);
   text("score : ", width/2-60,80);
   text(counter, width/2+60,80);

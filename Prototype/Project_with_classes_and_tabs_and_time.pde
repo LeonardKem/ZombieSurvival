@@ -19,6 +19,8 @@ PImage personnageMoveRight_bas;
 PImage personnageMoveLeft_bas;
 PImage personnageMoveRight_gauche;
 PImage personnageMoveLeft_gauche;
+PImage zombieD;
+PImage zombieG;
 int time;
 int interval = 0;
 boolean haut, bas, gauche, droite; 
@@ -42,6 +44,10 @@ void setup()
   personnageMoveLeft_bas= loadImage("herog_bas.png");
   personnageMoveRight_gauche= loadImage("herod_gauche.png");
   personnageMoveLeft_gauche= loadImage("herog_gauche.png");
+  zombieD= loadImage("zombie1.png");
+  zombieD.resize(72,69);
+  zombieG= loadImage("zombie2.png");
+  zombieG.resize(72,69);
   size(1300,698);
   viePerso = 20000;
   avx=5;
@@ -88,14 +94,13 @@ void draw()
  
   if (menu == true)
   {
+    size(1300,698);
     menu();
-  h1.update(); 
-  h2.update();
   }
   if (game == true)
   {
   background(0);//map
-  for(int i=0; i < tic/100 ; i++) 
+  for(int i=0; i < tic/40 ; i++) 
   {
    Zombies[i].move(xPerso,yPerso);
    Zombies[i].display();
@@ -110,8 +115,6 @@ void draw()
   myPersonnage1.earnLife(xPerso,yPerso);
   time();
   messages();
-    h1.update(); 
-  h2.update();
 
   }
 }

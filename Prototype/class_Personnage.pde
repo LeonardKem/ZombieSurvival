@@ -227,7 +227,7 @@ void collision()
 
 void earnLife(int xPerso,int yPerso)
 {
-    if (time%10==0)
+    if (time%1000==0)
     {
     fill(250,0,0);
     rect(550,249,200,200);
