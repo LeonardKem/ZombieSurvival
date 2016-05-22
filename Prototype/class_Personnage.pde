@@ -1,16 +1,15 @@
 class Personnage 
 { 
-  color c;
+
   int xspeed;
   int yspeed;
   int xperso;
   int yperso;
-  int zonex;
+  int zonex;// this attribut set your speed at 0 if you are going to near to a wall 
   int zoney;
 
   // The Constructor is defined with arguments.
-  Personnage(color tempC, int tempxPerso, int tempyPersonnage, int tempXspeed, int tempYspeed, int xPerso, int yPerso) { 
-    c = tempC;
+  Personnage( int tempxPerso, int tempyPersonnage, int tempXspeed, int tempYspeed, int xPerso, int yPerso) { 
     xperso = tempxPerso;
     yperso = tempyPersonnage; 
     xspeed = tempXspeed;
@@ -19,33 +18,23 @@ class Personnage
     yperso=yPerso;
   }
 
-  void display() {
-    stroke(0);
-    fill(c);
+public  void display() { // allows to display the character before anything happens (a move or fire)
+  if (ImageBeforeMove == true ) image(personnageMoveLeft_haut, xPerso-40,yPerso-50);
+
   }
 
-
-  void  move() {
+public  void  move() {// allows to move
  if (keyPressed == true)
   {
-    if (key == 'z' && yPerso>0) {
-            if (
-            xPerso > 550-20 && 
-            xPerso< 550+200+20 && 
-            yPerso > 249-20 && 
-            yPerso < 249 )
-            {
-               yspeed=1;
-            }
+    ImageBeforeMove = false; 
+    if (key == 'z' && yPerso>0  ) { // go up
             yPerso = yPerso-yspeed ; 
             if (right==true)
             {
-              personnageMoveLeft_haut.resize(79,101);
       image(personnageMoveLeft_haut, xPerso-40,yPerso-50);
             }
       if (left == true)
       {
-      personnageMoveRight_haut.resize(79,101);
       image(personnageMoveRight_haut, xPerso-40,yPerso-50);
       haut=true;
       bas=false ; 
@@ -57,23 +46,13 @@ class Personnage
     
     
     
-    if (key == 's'&& yPerso<698) {
-       if (
-          xPerso > 550-20 && 
-          xPerso< 550-20+200+40 && 
-          yPerso  > 249+200 && 
-          yPerso < 249+200+20 )
-          {
-          yspeed=1; 
-          }
+    if (key == 's' && yPerso<698) {// go down
            if (right==true)
             {
-              personnageMoveLeft_bas.resize(79,101);
       image(personnageMoveLeft_bas, xPerso-40,yPerso-50);
             }
       if (left == true)
       {
-      personnageMoveRight_bas.resize(79,101);
       image(personnageMoveRight_bas, xPerso-40,yPerso-50);
       }
       yPerso = yPerso+yspeed ;
@@ -85,23 +64,13 @@ class Personnage
     
     
     
-    if (key == 'q' && xPerso>0) {
-         if (
-           xPerso > 550-20 && 
-           xPerso< 550 && 
-           yPerso > 249 && 
-           yPerso < 249+200 ) 
-           {
-              xspeed=1;
-           }
+    if (key == 'q' && xPerso>0) { // go right
             if (right==true)
             {
-              personnageMoveLeft_gauche.resize(101,79);
       image(personnageMoveLeft_gauche, xPerso-50,yPerso-40);
             }
       if (left == true)
       {
-      personnageMoveRight_gauche.resize(101,79);
       image(personnageMoveRight_gauche, xPerso-50,yPerso-40);
       }
       xPerso = xPerso-xspeed ;
@@ -112,26 +81,15 @@ class Personnage
     }
     
     
-    if (key == 'd' && xPerso<1300) {
-      if (
-          xPerso > 550+200 && 
-          xPerso< 550+200+20 && 
-          yPerso > 249 && 
-          yPerso < 249+200 )
-          {
-            xspeed=1;
-          }
+    if (key == 'd' && xPerso<1300) {// go left
            if (right==true)
             {
-              personnageMoveLeft_droite.resize(101,79);
       image(personnageMoveLeft_droite, xPerso-50,yPerso-40);
             }
       if (left == true)
       {
-      personnageMoveRight_droite.resize(101,79);
       image(personnageMoveRight_droite, xPerso-50,yPerso-40);
       }
-      
       xPerso = xPerso+xspeed ;
       haut=false;
       bas=false ; 
@@ -143,66 +101,265 @@ class Personnage
     {
       if (haut==true)
       {
-      personnageMoveRight_haut.resize(79,101);
       image(personnageMoveRight_haut, xPerso-40,yPerso-50);
       }
       
       if (bas==true)
       {
-        personnageMoveRight_bas.resize(79,101);
       image(personnageMoveRight_bas, xPerso-40,yPerso-50);
       }
       if (droite==true)
       {
-      personnageMoveRight_droite.resize(101,79);
+      
       image(personnageMoveRight_droite, xPerso-50,yPerso-40);
       }
        if (gauche==true)
       {
-      personnageMoveRight_gauche.resize(101,79);
       image(personnageMoveRight_gauche, xPerso-50,yPerso-40);
       }
   }
 }
 
-void collision()
+public void collision()// this method set your speed at 0 if you are going to near to a wall 
 {
   zonex=0;
   zoney=0;
   fill(0);
-
+  
+  
+  
+  
+  //rect(120,115,350,11); coordinate to the first wall
   if (
-  xPerso > 550-20 && 
-  xPerso< 550+200+20 && 
-  yPerso > 249-20 && 
-  yPerso < 249 ) //barre supérieure
+  xPerso > 120-50 && 
+  xPerso< 120+350+50 && 
+  yPerso > 115-50 && 
+  yPerso < 115 ) //barre supérieure
   {
    zoney=1;
   }
   if (
-  xPerso > 550-20 && 
-  xPerso< 550-20+200+40 && 
-  yPerso  > 249+200 && 
-  yPerso < 249+200+20 ) // barre bas
+  xPerso > 120-50 && 
+  xPerso< 120-50+350+90 && 
+  yPerso > 115+11 && 
+  yPerso < 115+11+50 ) // barre bas
   {
   zoney=1; 
   }
-  if (xPerso > 550-20 && 
-  xPerso< 550 && 
-  yPerso > 249 && 
-  yPerso < 249+200 ) //carré gauche
+   if (xPerso > 120-50 && 
+  xPerso< 120 && 
+  yPerso > 115 && 
+  yPerso < 115+11 ) //carré gauche
   {
   zonex=1;
   }
-  if (xPerso > 550+200 && 
-  xPerso< 550+200+20 && 
-  yPerso > 249 && 
-  yPerso < 249+200 ) //carré droite
+   if (xPerso > 120+350 && 
+  xPerso< 120+350+50 && 
+  yPerso > 115 && 
+  yPerso < 115+11 ) //carré droite
+  {
+  zonex=1;
+  }
+ 
+  
+  
+  
+  //rect(473,115,11,94); coordinate to the second wall
+    if (
+  xPerso > 473-50 && 
+  xPerso< 473+11+50 && 
+  yPerso > 115-50 && 
+  yPerso < 115 ) //barre supérieure
+  {
+   zoney=1;
+  }
+  if (
+  xPerso > 473-50 && 
+  xPerso< 473-50+11+90 && 
+  yPerso > 115+94 && 
+  yPerso < 115+94+50 ) // barre bas
+  {
+  zoney=1; 
+  }
+  if (xPerso > 473-50 && 
+  xPerso< 473 && 
+  yPerso > 115 && 
+  yPerso < 115+94 ) //carré gauche
+  {
+  zonex=1;
+  }
+   if (xPerso > 473+11 && 
+  xPerso< 473+11+50 && 
+  yPerso > 115 && 
+  yPerso < 115+94 ) //carré droite
   {
   zonex=1;
   }
   
+  
+  
+  // rect(473,277,11,120); 
+  if (
+  xPerso > 473-50 && 
+  xPerso< 473+11+50 && 
+  yPerso > 277-50 && 
+  yPerso < 277 ) //barre supérieure
+  {
+   zoney=1;
+  }
+   if (
+  xPerso > 473-50 && 
+  xPerso< 473-50+11+90 && 
+  yPerso > 277+120 && 
+  yPerso < 277+120+50 ) // barre bas
+  {
+  zoney=1; 
+  }
+  if (xPerso > 473-50 && 
+  xPerso< 473 && 
+  yPerso > 277 && 
+  yPerso < 277+120 ) //carré gauche
+  {
+  zonex=1;
+  }
+  if (xPerso > 473+11 && 
+  xPerso< 473+11+50 && 
+  yPerso > 277 && 
+  yPerso < 277+120 ) //carré droite
+  {
+  zonex=1;
+  }
+  
+  
+  // rect(473,500,11,110);
+  if (
+  xPerso > 473-50 && 
+  xPerso< 473+11+50 && 
+  yPerso > 500-50 && 
+  yPerso < 500 ) //barre supérieure
+  {
+   zoney=1;
+  }
+  if (
+  xPerso > 473-50 && 
+  xPerso< 473-50+11+90 && 
+  yPerso > 500+110 && 
+  yPerso < 500+110+50 ) // barre bas
+  {
+  zoney=1; 
+  }
+  if (xPerso > 473-50 && 
+  xPerso< 473 && 
+  yPerso > 500 && 
+  yPerso < 500+110 ) //carré gauche
+  {
+  zonex=1;
+  }
+  if (xPerso > 473+11 && 
+  xPerso< 473+11+50 && 
+  yPerso > 500 && 
+  yPerso < 500+110 ) //carré droite
+  {
+  zonex=1;
+  }
  
+  
+    //rect(15,590,130,11);
+  if (
+  xPerso > 15-50 && 
+  xPerso< 15+130+50 && 
+  yPerso > 590-50 && 
+  yPerso < 590 ) //barre supérieure
+  {
+   zoney=1;
+  }
+  if (
+  xPerso > 15-50 && 
+  xPerso< 15-50+130+90 && 
+  yPerso > 590+11 && 
+  yPerso < 590+11+50 ) // barre bas
+  {
+  zoney=1; 
+  }
+  if (xPerso > 15-50 && 
+  xPerso< 15 && 
+  yPerso > 590 && 
+  yPerso < 590+11 ) //carré gauche
+  {
+  zonex=1;
+  }
+  if (xPerso > 15+130 && 
+  xPerso< 15+130+50 && 
+  yPerso > 590 && 
+  yPerso < 590+11 ) //carré droite
+  {
+  zonex=1;
+  }
+ 
+  //rect(290,590,210,11);
+  if (
+  xPerso > 290-50 && 
+  xPerso< 290+210+50 && 
+  yPerso > 590-50 && 
+  yPerso < 590 ) //barre supérieure
+  {
+   zoney=1;
+  }
+  if (
+  xPerso > 290-50 && 
+  xPerso< 290-50+210+90 && 
+  yPerso > 590+11 && 
+  yPerso < 590+11+50 ) // barre bas
+  {
+  zoney=1; 
+  }
+  if (xPerso > 290-50 && 
+  xPerso< 290 && 
+  yPerso > 590 && 
+  yPerso < 590+11 ) //carré gauche
+  {
+  zonex=1;
+  }
+  if (xPerso > 290+210 && 
+  xPerso< 290+210+50 && 
+  yPerso > 590 && 
+  yPerso < 590+11 ) //carré droite
+  {
+  zonex=1;
+  }
+ 
+  
+  //rect(15,115,11,480);
+  if (
+  xPerso > 15-50 && 
+  xPerso< 15+11+50 && 
+  yPerso > 115-50 && 
+  yPerso < 115 ) //barre supérieure
+  {
+   zoney=1;
+  }
+  if (
+  xPerso > 15-50 && 
+  xPerso< 15-50+11+90 && 
+  yPerso > 115+480 && 
+  yPerso < 115+480+50 ) // barre bas
+  {
+  zoney=1; 
+  }
+  if (xPerso > 15-50 && 
+  xPerso< 15 && 
+  yPerso > 115 && 
+  yPerso < 115+480 ) //carré gauche
+  {
+  zonex=1;
+  }
+  if (xPerso > 15+11 && 
+  xPerso< 15+11+50 && 
+  yPerso > 115 && 
+  yPerso < 115+480 ) //carré droite
+  {
+  zonex=1;
+  }
  
  
   if (zonex > 0) // si le personnage est dans une zone proche d'un mur, sa vitesse est égale à 0 
@@ -213,6 +370,7 @@ void collision()
   {
     yspeed=0;
   }
+  if (zoney >0 && zonex>0) xspeed=5;
    if (zoney==0)
   {
     yspeed=5;
@@ -221,23 +379,44 @@ void collision()
   {
     xspeed=5;
   }
-  
-  
+  if (zonex==0 || zoney==0)
+  {
+  if(xPerso > 15 && xPerso< 469 && yPerso > 115 && yPerso<600 )
+  {
+     if (keyPressed == true)
+  {
+    if (key == 'z' && yPerso>300  ) { // go up
+            yspeed=5; 
+  }
+   if (key == 's' && yPerso<300  ) { // go down
+            yspeed=5; 
+  }
+   if (key == 'd' && xPerso<300  ) { // go right
+            xspeed=5; 
+  }
+   if (key == 'q' && xPerso>300  ) { // go left
+            xspeed=5; 
+  }
 }
 
-void earnLife(int xPerso,int yPerso)
-{
-    if (time%1000==0)
-    {
-    fill(250,0,0);
-    rect(550,249,200,200);
-    if(xPerso >520 && xPerso <770 && yPerso >219 && yPerso < 469 )
-    {
-      viePerso= viePerso+1; 
-    }
+
   }
-
-
-
+  else 
+  {
+        if (keyPressed == true)
+  {
+    if (key == 'z' && yPerso<300  ) { // go up
+            yspeed=5; 
+  }
+   if (key == 's' && yPerso>300  ) { // go down
+            yspeed=5; 
+  }
+   if (key == 'd' && xPerso>300  ) { // go right
+            xspeed=5; 
+  }
+}
+    
+  }
+  }
 }
 }
