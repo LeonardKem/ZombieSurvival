@@ -8,7 +8,7 @@ class Zombie {
   int zonex;
   int zoney;
   int vieZombie;
-  float angle; // angle between the direction of view of the zombie and the character
+  float angle; // angle between the direction of view of the zombie and the player
   boolean counterOn;// if the the zombie dies, the score is updated 
 
 
@@ -65,7 +65,7 @@ private void rotateZombieG() // rotate the image with the left foot in front
 
 
 
-  public void  move(int xperso, int yperso) { // follow the character 
+  public void  move(int xperso, int yperso) { // follow the player 
     if (vieZombie > 0)
    {
    if (xZombie > xperso )
@@ -101,7 +101,7 @@ private void rotateZombieG() // rotate the image with the left foot in front
 
 
 
-public void collision()// same thing that the collisions with the character 
+public void collision()// same thing that the collisions with the player 
 {
   if (vieZombie > 0 ) 
     {
@@ -373,7 +373,7 @@ public void collision()// same thing that the collisions with the character
   zonex=1;
   }
   
-  if (zonex > 0) // si le personnage est dans une zone proche d'un mur, sa vitesse est égale à 0 
+  if (zonex > 0)
   {
     xspeed=0;
   }
@@ -392,7 +392,7 @@ public void collision()// same thing that the collisions with the character
   }
     
     
-    if ( // if the zombie attacks the character, the character loses  life
+    if ( // if the zombie attacks the player, the player loses  life
   xPerso > xZombie-20 && 
   xPerso < xZombie+20 && 
   yPerso > yZombie-20 && 
@@ -413,7 +413,7 @@ public void collision()// same thing that the collisions with the character
 
 
 
-public void fire(int xPerso,int yPerso) // if the flèche and the zombie is in the trajectory of the shot, he loses life 
+public void fire(int xPerso,int yPerso) // if the Up/down/left/right arrow key and the zombie is in the same trajectory, he loses life 
 {
   if (vieZombie > 0 ) 
     {

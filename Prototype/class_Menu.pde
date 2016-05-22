@@ -11,7 +11,7 @@ class Menu
     noStroke();
     rect(525,490,200,50);
   }
-   if (mousePressed == true && mouseX >525 && mouseX <725  && mouseY> 490 && mouseY < 540)
+   if (mousePressed == true && mouseX >525 && mouseX <725  && mouseY> 490 && mouseY < 540)// if you press your mouse on start, launch the game
   {
     menu = false; 
     game = true;
@@ -20,6 +20,6 @@ class Menu
   }
 public void music()
 {
-MenuMusic.play();
+MenuMusic.play();// launch the music
 }
 }

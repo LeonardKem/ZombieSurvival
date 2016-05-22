@@ -6,9 +6,9 @@ import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 
 
-AudioSnippet GameMusic; // creating a new variable for a sound
+AudioSnippet GameMusic; // creating a new variable for the GameMusic
 Minim minim;
-AudioSnippet MenuMusic; // creating a new variable for a sound
+AudioSnippet MenuMusic; // creating a new variable for the MenuMusic
 Minim minim2;
 
 
@@ -19,16 +19,15 @@ Map Map;
 Menu Menu;
 
 
-int mapx=0; // in case of a map bigger then the screen, we could get the segment of the map containing the personnage 
-int mapy=0;
-int xPerso=650;// variable of the personnage position 
+
+int xPerso=650;// variable of the player position 
 int yPerso=349;
-float viePerso; //Life of the personnage 
-int xspeed, yspeed;// Speed of the personnage 
+float viePerso; //Life of the player
+int xspeed, yspeed;// Speed of the player
 boolean menu; // boolean variable to know if we are on the menu 
 boolean game;// boolean variable to know if we are on the game
 PImage menuBackground;// creating a variable to store the menu image
-PImage personnageMoveRight_haut; // the following variable store the different sprite of the personnage
+PImage personnageMoveRight_haut; // the following variable store the different sprites of the player
 PImage personnageMoveLeft_haut;
 PImage personnageMoveRight_droite;
 PImage personnageMoveLeft_droite;
@@ -36,20 +35,19 @@ PImage personnageMoveRight_bas;
 PImage personnageMoveLeft_bas;
 PImage personnageMoveRight_gauche;
 PImage personnageMoveLeft_gauche;
-PImage zombieD; // the variable store the zombie with the right and the left feet
+PImage zombieD; // the variable store the zombie with the right feet
 PImage zombieG;
-PImage grass; // a texture of grass for the map 
 PImage background; // the variable to store the background of the game (the map)
-int time; // the variable storing a stopwatch
+int time; // the variable is storing a stopwatch
 int interval = 0;
-boolean haut, bas, gauche, droite; // position of the character
-boolean right=true;// the right foot of the character/Zombies is in front
-boolean left = false;// the left foot of the character/Zombies is in front
+boolean haut, bas, gauche, droite; // position of the player
+boolean right=true;// the right foot of the player/Zombies is in front
+boolean left = false;// the left foot of the player/Zombies is in front
 float tic=0; // a variable depending on the time (easier to manipulate)
 int timeExpected; //time expected before something happens
 int timeExpectedForTic=0;
 int counter; // a counter to know how many zombies you have already killed
-boolean ImageBeforeMove = true; // this variable allows to display the character before anything happens (move or fire)
+boolean ImageBeforeMove = true; // this variable allows to display the player before anything happens (move or fire)
 boolean a; //serves to switch the status of right and left
 
 
@@ -65,7 +63,6 @@ void setup()// A fonction to setup all the variables
   MenuMusic = minim.loadSnippet("MenuMusic.mp3");
   
   
-  grass= loadImage("891_ground-top.jpg");
   menuBackground= loadImage("menu.png");
   personnageMoveRight_haut= loadImage("herod_haut.png");
   personnageMoveLeft_haut= loadImage("herog_haut.png");
@@ -138,7 +135,7 @@ void draw() // here is a fonction to display all the things happening on our pro
   
    Menu.display(); // display the menu
    Menu.Start(); // if you click start, the game start 
-   Menu.music();
+   Menu.music();// launch the MenuMusic
   }
   if (game == true)
   {
@@ -155,14 +152,14 @@ void draw() // here is a fonction to display all the things happening on our pro
    Zombies[i].move(xPerso,yPerso);// a method allowing zombies to move
    Zombies[i].display();// a method displaying the zombies
    Zombies[i].collision(); // a method avoiding zombies to pass trough walls
-   Zombies[i].fire(xPerso,yPerso); // a method allow the character to fire on zombies
+   Zombies[i].fire(xPerso,yPerso); // a method allowing the player to fire on zombies
   
  }
 
   
-  myPersonnage1.move();// a method allowing the character to move
-  myPersonnage1.display();// a method displaying the character
-  myPersonnage1.collision();// a method avoiding the character to pass trough walls
+  myPersonnage1.move();// a method allowing the player to move
+  myPersonnage1.display();// a method displaying the player
+  myPersonnage1.collision();// a method avoiding the player to pass trough walls
   
  
  

@@ -5,7 +5,7 @@ class Personnage
   int yspeed;
   int xperso;
   int yperso;
-  int zonex;// this attribut set your speed at 0 if you are going to near to a wall 
+  int zonex;// this attribute set your speed at 0 if you are going to near to a wall 
   int zoney;
 
   // The Constructor is defined with arguments.
@@ -18,7 +18,7 @@ class Personnage
     yperso=yPerso;
   }
 
-public  void display() { // allows to display the character before anything happens (a move or fire)
+public  void display() { // allows to display the player before anything happens (a move or fire)
   if (ImageBeforeMove == true ) image(personnageMoveLeft_haut, xPerso-40,yPerso-50);
 
   }
@@ -362,7 +362,7 @@ public void collision()// this method set your speed at 0 if you are going to ne
   }
  
  
-  if (zonex > 0) // si le personnage est dans une zone proche d'un mur, sa vitesse est égale à 0 
+  if (zonex > 0) //  if you are going to near to a wall set your speed at 0
   {
     xspeed=0;
   }
@@ -403,7 +403,7 @@ public void collision()// this method set your speed at 0 if you are going to ne
   }
   else 
   {
-        if (keyPressed == true)
+        if (keyPressed == true) // if you are stuck on a wall, it's allowing you to move
   {
     if (key == 'z' && yPerso<300  ) { // go up
             yspeed=5; 

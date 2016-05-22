@@ -7,11 +7,7 @@ class Map
   if (game == true)
   {
   time = interval+int(millis()/50);// the stop watch
-     if(time >timeExpected)// a function allowing to create a new unit based on time
-  {
-   timeExpected= timeExpected+100;
-   tic=tic+1;
-  }
+
     if(time >timeExpectedForTic)// a function allowing to create a new unit based on time
   {
    timeExpectedForTic= timeExpectedForTic+1;
@@ -47,10 +43,10 @@ public void messages()
   text("life:",20,100); 
   stroke(106,240,97);
   strokeWeight(10);
-  line(100,90,viePerso+100,90);// display the remaining life of the character
+  line(100,90,viePerso+100,90);// display the remaining life of the player
 
   text("score : ", width/2-60,80);
-  text(counter, width/2+60,80); // diplay the score
+  text(counter, width/2+60,80); // display the score
   
   
 
@@ -59,7 +55,7 @@ public void messages()
   textSize(100);
   textAlign(CENTER);
   fill(250,0,0);
-  text("Game Over",width/2,height/2); // if the character dies, display Game Over
+  text("Game Over",width/2,height/2); // if the player dies, display Game Over
   noLoop();
  }
 }
